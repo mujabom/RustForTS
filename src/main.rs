@@ -22,12 +22,21 @@ fn main() {
     //my sol 2 using into_iter
     // let res:Vec<i32> = vec![1,2,3].into_iter().map(|x| x+1).collect();
 
-    println!("my directly mutated map {:?}", vec![1, 2, 3].into_iter().map(|x| x + 1).collect::<Vec<i32>>());
+    println!(
+        "my directly mutated map {:?}",
+        vec![1, 2, 3]
+            .into_iter()
+            .map(|x| x + 1)
+            .collect::<Vec<i32>>()
+    );
     test_hash_map()
 }
 
-
 fn test_hash_map() {
-    let map: HashMap<usize, &str> = vec!["this", "is", "test"].into_iter().enumerate().map(|(idx, value)| (idx, value)).collect();
+    let map: HashMap<usize, &str> = vec!["this", "is", "test"]
+        .into_iter()
+        .enumerate()
+        .map(|(idx, value)| (idx, value))
+        .collect();
     println!("{:?}", map)
 }
