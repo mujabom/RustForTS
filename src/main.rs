@@ -1,42 +1,50 @@
-use std::collections::HashMap;
+use crate::Color::Red;
 
-fn main() {
-    //my solution
-    let mut c = vec![1, 2, 3];
-    c = c.iter().map(|x| x + 1).collect();
-    println!("{:?}", c);
+enum Color {
+    Red,
+    Blue,
+    Green,
+    Yellow,
+}
 
-    //copied from course sol:1
-    let foo: Vec<usize> = vec![1, 2, 3].iter().map(|x| x + 1).collect();
-    println!("{:?}", foo);
-
-    //from course sol:2
-    let data = vec![1, 2, 3];
-    let mut iter = data.iter().map(|x| x + 1);
-    let mut collected = vec![];
-    while let Some(val) = iter.next() {
-        collected.push(val);
+impl Color {
+    fn is_green(&self) -> bool {
+        if let Color::Green = self {
+            return true;
+        }
+        return false;
     }
-    println!("yay it works{:?}", collected);
 
-    //my sol 2 using into_iter
-    // let res:Vec<i32> = vec![1,2,3].into_iter().map(|x| x+1).collect();
-
-    println!(
-        "my directly mutated map {:?}",
-        vec![1, 2, 3]
-            .into_iter()
-            .map(|x| x + 1)
-            .collect::<Vec<i32>>()
-    );
-    test_hash_map()
+    fn is_green_parts(&self) -> bool {
+        match self {
+            Color::Green => false,
+            Color::Red => false,
+            Color::Blue => true,
+            Color::Yellow => true,
+        }
+    }
+}
+fn main() {
+    print_color(Red);
+    let foo = Color::Blue;
+    println!("{}",foo.is_green_parts())
 }
 
-fn test_hash_map() {
-    let map: HashMap<usize, &str> = vec!["this", "is", "test"]
-        .into_iter()
-        .enumerate()
-        .map(|(idx, value)| (idx, value))
-        .collect();
-    println!("{:?}", map)
+fn print_color(color: Color) -> () {
+    match color {
+        Color::Red => {
+            println!("Red")
+        }
+        Color::Blue => {
+            println!("blue")
+        }
+        Color::Green => {
+            println!("green")
+        }
+
+        Color::Yellow => {
+            println!("Yellow")
+        }
+    }
 }
+
