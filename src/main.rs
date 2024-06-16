@@ -1,13 +1,10 @@
 fn main(){
-    let result = multiply_with_5(Some(1034388888));
-
-    match result {
-        Some(num) => println!("Result is {}", num),
-        None => println!("No result")
-    }
+    let num = vec![1,2,3,4,5];
+    let index = 7;
+    let result = practice(num,index);
+    println!("The result is {}",result);
 }
 
-fn multiply_with_5(inp:Option<u32>) -> Option<usize> {
-    let multiplier:usize = 334535345;
-    Some(inp? as usize * multiplier)
+fn practice(num:Vec<usize>,index:usize)->usize{
+    return num.get(index).unwrap_or(&index) * 5;
 }
