@@ -1,18 +1,36 @@
-#[derive(Debug)]
-struct Item {
-    count: i32,
+mod shapes;
+use shapes::{Area, Circle, React};
+use std::fmt::Debug;
+
+struct ReactIterator {
+    points: Vec<(f64, f64)>,
+    index: usize
 }
 
-fn add_one(mut item: Item) -> Item {
-    item.count += 1;
-    item
+impl Iterator for ReactIterator {
+    type Item = (f64, f64);
+
+    fn next(&mut self) -> Option<Self::Item> {
+        let idx = self.index;
+        self.index += 1;
+        return self.points.get(idx).map(|x| *x)
+    }
 }
 
 fn main() {
-    let item = Item { count: 42 };
-    println!("{:?}", item);
-    let mut item = add_one(item);
-    item.count += 5;
-    println!("{:?}", item);
-    // println!("{:?}", item);
+    let react = React {
+        x: 0.0,
+        y: 0.0,
+        width: 10.0,
+        height: 20.0,
+    };
+    let circle = Circle {
+        x: 0.0,
+        y: 0.0,
+        radius: 10.0,
+    };
+    println!("default circle {:?}", Circle::default());
+    println!("Default React {:?}", React::default());
+    println!("React area: {}", react.area());
+    println!("Circle area: {}", circle.area());
 }
